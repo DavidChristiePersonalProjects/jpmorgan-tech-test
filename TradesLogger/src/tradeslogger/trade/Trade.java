@@ -90,7 +90,7 @@ public class Trade {
      * @param settlementDate LocalDate object containing the date the trade was settled
      * @param units BigDecimal object containing the number of units to be traded
      * @param pricePerUnit BigDecimal object containing the price per unit
-     * @return Optional<Trade> object that will contain a Trade if the parameters where valid or will be empty if not
+     * @return Optional object that will contain a Trade object if the parameters where valid or will be empty if not
      */
     static public Optional<Trade> create (String entity, TradeTypes type, BigDecimal agreedForiegnExchangeRate, TradeCurrencies currency, LocalDate instructionDate, LocalDate settlementDate, BigDecimal units, BigDecimal pricePerUnit) {
         Optional<Trade> optionalTrade = Optional.empty();
@@ -120,7 +120,7 @@ public class Trade {
      * @param instructionDate LocalDate object containing the date the trade was instructed
      * @param units BigDecimal object containing the number of units to be traded
      * @param pricePerUnit BigDecimal object containing the price per unit
-     * @return Optional<Trade> object that will contain a Trade if the parameters where valid or will be empty if not
+     * @return Optional object that will contain a Trade object if the parameters where valid or will be empty if not
      */
     static public Optional<Trade> create (String entity, TradeTypes type, BigDecimal agreedForiegnExchangeRate, TradeCurrencies currency, LocalDate instructionDate, BigDecimal units, BigDecimal pricePerUnit) {
         Optional<Trade> optionalTrade = Optional.empty();

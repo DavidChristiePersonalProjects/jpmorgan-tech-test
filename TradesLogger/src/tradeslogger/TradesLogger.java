@@ -137,7 +137,7 @@ public class TradesLogger {
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
         optionalTrade = Trade.create(
-                "test",
+                "foo",
                 TradeTypes.BUY,
                 BigDecimal.valueOf(0.22),
                 TradeCurrencies.AED,
@@ -148,8 +148,64 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
+        optionalTrade = Trade.create(
+                "bar",
+                TradeTypes.BUY,
+                BigDecimal.valueOf(0.21),
+                TradeCurrencies.AED,
+                LocalDate.of(2018, Month.JULY, 8),
+                BigDecimal.valueOf(200),
+                BigDecimal.valueOf(100.21)
+        );
+        if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
+        
+        optionalTrade = Trade.create(
+                "foobar",
+                TradeTypes.BUY,
+                BigDecimal.valueOf(0.22),
+                TradeCurrencies.AED,
+                LocalDate.of(2018, Month.JULY, 7),
+                BigDecimal.valueOf(200),
+                BigDecimal.valueOf(100.21)
+        );
+        if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
+        
+        optionalTrade = Trade.create(
+                "test",
+                TradeTypes.BUY,
+                BigDecimal.valueOf(0.23),
+                TradeCurrencies.SGP,
+                LocalDate.of(2018, Month.JULY, 8),
+                BigDecimal.valueOf(200),
+                BigDecimal.valueOf(100.21)
+        );
+        if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
+        
+        optionalTrade = Trade.create(
+                "foo",
+                TradeTypes.BUY,
+                BigDecimal.valueOf(0.22),
+                TradeCurrencies.SGP,
+                LocalDate.of(2018, Month.JULY, 9),
+                BigDecimal.valueOf(200),
+                BigDecimal.valueOf(100.2)
+        );
+        if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
+        
+        optionalTrade = Trade.create(
+                "bar",
+                TradeTypes.BUY,
+                BigDecimal.valueOf(0.22),
+                TradeCurrencies.SGP,
+                LocalDate.of(2018, Month.JULY, 7),
+                BigDecimal.valueOf(200),
+                BigDecimal.valueOf(100.25)
+        );
+        if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
+        
         
         TradesManager tradesManager = new TradesManager(trades);
+        tradesManager.setSettlementDates();
         Logger logger = new Logger(tradesManager);
         logger.logSettledReport();
     }

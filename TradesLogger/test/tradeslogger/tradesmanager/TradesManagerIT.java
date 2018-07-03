@@ -6,6 +6,7 @@
 package tradeslogger.tradesmanager;
 
 import java.math.BigDecimal;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -418,4 +419,238 @@ public class TradesManagerIT {
         }
     }
     
+    /**
+     * Test of setSettlementDate method, of class TradesManager.
+     */
+    @Test
+    public void testSetSettlementDate_SundayToThursdayWeek() {
+        System.out.println("setSettlementDate_SundayToThursdayWeek");
+        Optional<Trade> optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.AED, 
+                LocalDate.of(2018, Month.JULY, 1), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        Trade trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        TradesManager instance = new TradesManager(null);
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.MONDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.AED, 
+                LocalDate.of(2018, Month.JULY, 2), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.TUESDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.AED, 
+                LocalDate.of(2018, Month.JULY, 3), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.WEDNESDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.AED, 
+                LocalDate.of(2018, Month.JULY, 4), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.THURSDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.AED, 
+                LocalDate.of(2018, Month.JULY, 5), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.SUNDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.AED, 
+                LocalDate.of(2018, Month.JULY, 6), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.SUNDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.AED, 
+                LocalDate.of(2018, Month.JULY, 7), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.SUNDAY);
+    }
+    
+    /**
+     * Test of setSettlementDate method, of class TradesManager.
+     */
+    @Test
+    public void testSetSettlementDate_MondayToFridayWeek() {
+        System.out.println("setSettlementDate_MondayToFridayWeek");
+        Optional<Trade> optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.SGP, 
+                LocalDate.of(2018, Month.JULY, 1), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        Trade trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        TradesManager instance = new TradesManager(null);
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.MONDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.SGP, 
+                LocalDate.of(2018, Month.JULY, 2), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.TUESDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.SGP, 
+                LocalDate.of(2018, Month.JULY, 3), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.WEDNESDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.SGP, 
+                LocalDate.of(2018, Month.JULY, 4), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.THURSDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.SGP, 
+                LocalDate.of(2018, Month.JULY, 5), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.FRIDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.SGP, 
+                LocalDate.of(2018, Month.JULY, 6), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.MONDAY);
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.SGP, 
+                LocalDate.of(2018, Month.JULY, 7), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        instance.setSettlementDate(trade);
+        assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.MONDAY);
+    }
+
+    /**
+     * Test of setSettlementDates method, of class TradesManager.
+     */
+    @Test
+    public void testSetSettlementDates() {
+        System.out.println("setSettlementDates");
+        List<Trade> trades = new ArrayList<>();
+        Optional<Trade> optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.SGP, 
+                LocalDate.of(2018, Month.JULY, 1), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
+        
+        optionalTrade = Trade.create(
+                "test", 
+                TradeTypes.BUY, 
+                BigDecimal.ONE, 
+                TradeCurrencies.SGP, 
+                LocalDate.of(2018, Month.JULY, 2), 
+                BigDecimal.ONE, 
+                BigDecimal.ONE
+        );
+        if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
+        
+        TradesManager instance = new TradesManager(trades);
+        instance.setSettlementDates();
+        
+        assertEquals(trades.get(0).getSettlementDate().getDayOfWeek(), DayOfWeek.MONDAY);
+        assertEquals(trades.get(1).getSettlementDate().getDayOfWeek(), DayOfWeek.TUESDAY);
+    }
+
 }
