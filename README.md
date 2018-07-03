@@ -40,7 +40,7 @@ one or two would be required.
 # Design
 Need 3 classes in order to seperate concerns. One class to represent a trade, one class to manage trades, and one class to log the report.
 
-In addition create an interface to represent trade types (BUY or SELL) to simplify comparrisons in code and and interface for currencies to make it easier to extend the code.
+In addition create an interface to represent trade types (BUY or SELL) to simplify comparrisons in code and and an interface for currencies to make it easier to extend the code.
 
 # Methodology
 Used test driven development to implement the functionality.
