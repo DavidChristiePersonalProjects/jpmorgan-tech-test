@@ -51,7 +51,8 @@ After this I implemented unit test functionality and then the class functionalit
 I then iteratively expanded the unit test functionality and refactored the class functionality until I felt I was happy to call it production ready.
 
 # Running
-To run this application from the command line without Ant, try:_
+To run this application from the command line without Ant, try:
+
 java -jar "TradesLogger\dist\TradesLogger.jar"
 
 # Documentation
