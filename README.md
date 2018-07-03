@@ -1,8 +1,8 @@
 # jpmorgan-tech-test
 Technical Test for JP Morgan
 
-Created in NetBeans 8.2__
-Built using JDK 1.8__
+Created in NetBeans 8.2< /br>
+Built using JDK 1.8</ br>
 Tested using JUnit 4.12 and Hamcrest 1.3
 
 # Description
@@ -48,9 +48,9 @@ Created the TradeTypes and TradeCurrencies interface, created theTrade, TradeMan
 After this I implemented unit test functionality and then the class functionality to get the units test to pass.
 I then iteratively expanded the unit test functionality and refactored the class functionality until I felt I was happy to call it production ready.
 
-#Running
+# Running
 To run this application from the command line without Ant, try:_
 java -jar "TradesLogger\dist\TradesLogger.jar"
 
-#Documentation
+# Documentation
 The documentation can be launched from TradesLogger\dist\javadoc\index.html
