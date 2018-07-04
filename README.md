@@ -46,7 +46,7 @@ In addition create an interface to represent trade types (BUY or SELL) to simpli
 Used test driven development to implement the functionality.
 
 # Implementation
-Created the TradeTypes and TradeCurrencies interface, created the Trade, TradeManager, and Logger classes, and generatated unit tests for Trade and TradeManager (not for the Logger class as it only outputs to the console).  
+Created the TradeTypes and TradeCurrencies interfaces, created the Trade, TradeManager, and Logger classes, and generatated unit tests for Trade and TradeManager (not for the Logger class as it only outputs to the console).  
 After this I implemented unit test functionality and then the class functionality to get the units test to pass.
 I then iteratively expanded the unit test functionality and refactored the class functionality until I felt I was happy to call it production ready.
 
