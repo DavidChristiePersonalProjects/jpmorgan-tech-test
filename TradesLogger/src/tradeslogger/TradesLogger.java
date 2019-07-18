@@ -11,11 +11,12 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import tradeslogger.logger.Logger;
+import tradeslogger.logger.LoggerImpl;
 import tradeslogger.trade.Trade;
+import tradeslogger.trade.TradeImpl;
 import tradeslogger.trade.TradeCurrencies;
 import tradeslogger.trade.TradeTypes;
-import tradeslogger.tradesmanager.TradesManager;
+import tradeslogger.tradesmanager.TradesManagerImpl;
 
 /**
  *
@@ -28,7 +29,7 @@ public class TradesLogger {
      */
     public static void main(String[] args) {
         List<Trade> trades = new ArrayList();
-        Optional<Trade> optionalTrade = Trade.create(
+        Optional<TradeImpl> optionalTrade = TradeImpl.create(
                 "foo", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.5), 
@@ -40,7 +41,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar",
                 TradeTypes.SELL,
                 BigDecimal.valueOf(0.22),
@@ -52,7 +53,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test",
                 TradeTypes.SELL,
                 BigDecimal.valueOf(0.22),
@@ -64,7 +65,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foo", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0.5), 
@@ -76,7 +77,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar",
                 TradeTypes.SELL,
                 BigDecimal.valueOf(0.22),
@@ -88,7 +89,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar",
                 TradeTypes.SELL,
                 BigDecimal.valueOf(0.22),
@@ -100,7 +101,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foo", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0.5), 
@@ -112,7 +113,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test",
                 TradeTypes.SELL,
                 BigDecimal.valueOf(0.21),
@@ -124,7 +125,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test",
                 TradeTypes.SELL,
                 BigDecimal.valueOf(0.22),
@@ -136,7 +137,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foo",
                 TradeTypes.BUY,
                 BigDecimal.valueOf(0.22),
@@ -148,7 +149,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar",
                 TradeTypes.BUY,
                 BigDecimal.valueOf(0.21),
@@ -159,7 +160,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foobar",
                 TradeTypes.BUY,
                 BigDecimal.valueOf(0.22),
@@ -170,7 +171,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test",
                 TradeTypes.BUY,
                 BigDecimal.valueOf(0.23),
@@ -181,7 +182,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foo",
                 TradeTypes.BUY,
                 BigDecimal.valueOf(0.22),
@@ -192,7 +193,7 @@ public class TradesLogger {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar",
                 TradeTypes.BUY,
                 BigDecimal.valueOf(0.22),
@@ -204,9 +205,9 @@ public class TradesLogger {
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
         
-        TradesManager tradesManager = new TradesManager(trades);
+        TradesManagerImpl tradesManager = new TradesManagerImpl(trades);
         tradesManager.setSettlementDates();
-        Logger logger = new Logger(tradesManager);
+        LoggerImpl logger = new LoggerImpl(tradesManager);
         logger.logSettledReport();
     }
     

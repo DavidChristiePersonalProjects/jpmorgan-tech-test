@@ -19,6 +19,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import tradeslogger.trade.Trade;
+import tradeslogger.trade.TradeImpl;
 import tradeslogger.trade.TradeCurrencies;
 import tradeslogger.trade.TradeTypes;
 
@@ -26,9 +27,9 @@ import tradeslogger.trade.TradeTypes;
  *
  * @author David
  */
-public class TradesManagerIT {
+public class TradesManagerImplTest {
     
-    public TradesManagerIT() {
+    public TradesManagerImplTest() {
     }
     
     @BeforeClass
@@ -48,7 +49,7 @@ public class TradesManagerIT {
     }
 
     /**
-     * Test of getDailyTotal method, of class TradesManager.
+     * Test of getDailyTotal method, of class TradesManagerImpl.
      */
     @Test
     public void testGetDailyTotal_incomings() {
@@ -56,7 +57,7 @@ public class TradesManagerIT {
         LocalDate date = LocalDate.of(2016, Month.JANUARY, 02);
         TradeTypes tradeInstruction = TradeTypes.SELL;       
         List<Trade> trades = new ArrayList();
-        Optional<Trade> optionalTrade = Trade.create(
+        Optional<TradeImpl> optionalTrade = TradeImpl.create(
                 "foo", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.5), 
@@ -68,7 +69,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foo", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.6), 
@@ -80,7 +81,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.5), 
@@ -93,7 +94,7 @@ public class TradesManagerIT {
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
                 
         // won't be included as it has no settlement date
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foobar", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.5), 
@@ -105,7 +106,7 @@ public class TradesManagerIT {
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
         // won't be included as it is an instruction to buy
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0.5), 
@@ -117,7 +118,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0), 
@@ -129,7 +130,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        TradesManager instance = new TradesManager(trades);
+        TradesManagerImpl instance = new TradesManagerImpl(trades);
         // ((200 * 100.25) * 0.5) + ((200 * 100.25) * 0.6) + ((300 * 100.25) * 0.5) + (300 * 100.25)= 10025 + 12030 + 15037.5 + 30075 = 67167.5
         BigDecimal expResult = (trades.get(0).total().add(trades.get(1).total())).add(trades.get(2).total()).add(trades.get(5).total());        
         BigDecimal result = instance.getDailyTotal(date, tradeInstruction);
@@ -137,7 +138,7 @@ public class TradesManagerIT {
         assertEquals(expResult, result);
     }
     /**
-     * Test of getDailyTotal method, of class TradesManager.
+     * Test of getDailyTotal method, of class TradesManagerImpl.
      */
     @Test
     public void testGetDailyTotal_outgoingss() {
@@ -145,7 +146,7 @@ public class TradesManagerIT {
         LocalDate date = LocalDate.of(2016, Month.JANUARY, 02);
         TradeTypes tradeInstruction = TradeTypes.BUY;       
         List<Trade> trades = new ArrayList();
-        Optional<Trade> optionalTrade = Trade.create(
+        Optional<TradeImpl> optionalTrade = TradeImpl.create(
                 "foo", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0.5), 
@@ -157,7 +158,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foo", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0.6), 
@@ -169,7 +170,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0.5), 
@@ -182,7 +183,7 @@ public class TradesManagerIT {
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
                 
         // won't be included as it has no settlement date
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foobar", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.5), 
@@ -194,7 +195,7 @@ public class TradesManagerIT {
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
         // won't be included as it is an instruction to sell
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.5), 
@@ -206,7 +207,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0), 
@@ -218,7 +219,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        TradesManager instance = new TradesManager(trades);
+        TradesManagerImpl instance = new TradesManagerImpl(trades);
         // ((200 * 100.25) * 0.5) + ((200 * 100.25) * 0.6) + ((300 * 100.25) * 0.5) + (300 * 100.25)= 10025 + 12030 + 15037.5 + 30075 = 67167.5
         BigDecimal expResult = (trades.get(0).total().add(trades.get(1).total())).add(trades.get(2).total()).add(trades.get(5).total());
         BigDecimal result = instance.getDailyTotal(date, tradeInstruction);
@@ -227,7 +228,7 @@ public class TradesManagerIT {
     }
 
     /**
-     * Test of getRankedDailyTrades method, of class TradesManager.
+     * Test of getRankedDailyTrades method, of class TradesManagerImpl.
      */
     @Test
     public void testGetRankedDailyTrades_incomings() {
@@ -235,7 +236,7 @@ public class TradesManagerIT {
         LocalDate date = LocalDate.of(2016, Month.JANUARY, 02);
         TradeTypes tradeInstruction = TradeTypes.SELL;       
         List<Trade> trades = new ArrayList();
-        Optional<Trade> optionalTrade = Trade.create(
+        Optional<TradeImpl> optionalTrade = TradeImpl.create(
                 "foo", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.5), 
@@ -247,7 +248,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foo", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.6), 
@@ -259,7 +260,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.5), 
@@ -272,7 +273,7 @@ public class TradesManagerIT {
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
                 
         // won't be included as it has no settlement date
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foobar", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.5), 
@@ -284,7 +285,7 @@ public class TradesManagerIT {
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
         // won't be included as it is an instruction to buy
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0.5), 
@@ -296,7 +297,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0), 
@@ -308,7 +309,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        TradesManager instance = new TradesManager(trades);
+        TradesManagerImpl instance = new TradesManagerImpl(trades);
         List<Trade> expResult = new ArrayList<>(4);
         expResult.add(trades.get(5));
         expResult.add(trades.get(2));
@@ -323,7 +324,7 @@ public class TradesManagerIT {
         }
     }
     /**
-     * Test of getRankedDailyTrades method, of class TradesManager.
+     * Test of getRankedDailyTrades method, of class TradesManagerImpl.
      */
     @Test
     public void testGetRankedDailyTrades_outgoings() {
@@ -331,7 +332,7 @@ public class TradesManagerIT {
         LocalDate date = LocalDate.of(2016, Month.JANUARY, 02);
         TradeTypes tradeInstruction = TradeTypes.BUY;       
         List<Trade> trades = new ArrayList();
-        Optional<Trade> optionalTrade = Trade.create(
+        Optional<TradeImpl> optionalTrade = TradeImpl.create(
                 "foo", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0.5), 
@@ -343,7 +344,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foo", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0.6), 
@@ -355,7 +356,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0.5), 
@@ -368,7 +369,7 @@ public class TradesManagerIT {
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
                 
         // won't be included as it has no settlement date
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "foobar", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0.5), 
@@ -380,7 +381,7 @@ public class TradesManagerIT {
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
         // won't be included as it is an instruction to sell
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.SELL, 
                 BigDecimal.valueOf(0.5), 
@@ -392,7 +393,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "bar", 
                 TradeTypes.BUY, 
                 BigDecimal.valueOf(0), 
@@ -404,7 +405,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        TradesManager instance = new TradesManager(trades);
+        TradesManagerImpl instance = new TradesManagerImpl(trades);
         List<Trade> expResult = new ArrayList<>(4);
         expResult.add(trades.get(5));
         expResult.add(trades.get(2));
@@ -420,12 +421,12 @@ public class TradesManagerIT {
     }
     
     /**
-     * Test of setSettlementDate method, of class TradesManager.
+     * Test of setSettlementDate method, of class TradesManagerImpl.
      */
     @Test
     public void testSetSettlementDate_SundayToThursdayWeek() {
         System.out.println("setSettlementDate_SundayToThursdayWeek");
-        Optional<Trade> optionalTrade = Trade.create(
+        Optional<TradeImpl> optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -434,12 +435,13 @@ public class TradesManagerIT {
                 BigDecimal.ONE, 
                 BigDecimal.ONE
         );
-        Trade trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
-        TradesManager instance = new TradesManager(null);
+        TradeImpl trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        TradesManagerImpl instance = new TradesManagerImpl(null);
         instance.setSettlementDate(trade);
+        
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.MONDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -452,7 +454,7 @@ public class TradesManagerIT {
         instance.setSettlementDate(trade);
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.TUESDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -465,7 +467,7 @@ public class TradesManagerIT {
         instance.setSettlementDate(trade);
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.WEDNESDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -478,7 +480,7 @@ public class TradesManagerIT {
         instance.setSettlementDate(trade);
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.THURSDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -491,7 +493,7 @@ public class TradesManagerIT {
         instance.setSettlementDate(trade);
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.SUNDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -504,7 +506,7 @@ public class TradesManagerIT {
         instance.setSettlementDate(trade);
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.SUNDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -519,12 +521,12 @@ public class TradesManagerIT {
     }
     
     /**
-     * Test of setSettlementDate method, of class TradesManager.
+     * Test of setSettlementDate method, of class TradesManagerImpl.
      */
     @Test
     public void testSetSettlementDate_MondayToFridayWeek() {
         System.out.println("setSettlementDate_MondayToFridayWeek");
-        Optional<Trade> optionalTrade = Trade.create(
+        Optional<TradeImpl> optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -533,12 +535,12 @@ public class TradesManagerIT {
                 BigDecimal.ONE, 
                 BigDecimal.ONE
         );
-        Trade trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
-        TradesManager instance = new TradesManager(null);
+        TradeImpl trade = optionalTrade.isPresent() ? optionalTrade.get() : null;
+        TradesManagerImpl instance = new TradesManagerImpl(null);
         instance.setSettlementDate(trade);
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.MONDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -551,7 +553,7 @@ public class TradesManagerIT {
         instance.setSettlementDate(trade);
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.TUESDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -564,7 +566,7 @@ public class TradesManagerIT {
         instance.setSettlementDate(trade);
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.WEDNESDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -577,7 +579,7 @@ public class TradesManagerIT {
         instance.setSettlementDate(trade);
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.THURSDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -590,7 +592,7 @@ public class TradesManagerIT {
         instance.setSettlementDate(trade);
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.FRIDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -603,7 +605,7 @@ public class TradesManagerIT {
         instance.setSettlementDate(trade);
         assertEquals(trade.getSettlementDate().getDayOfWeek(), DayOfWeek.MONDAY);
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -618,13 +620,13 @@ public class TradesManagerIT {
     }
 
     /**
-     * Test of setSettlementDates method, of class TradesManager.
+     * Test of setSettlementDates method, of class TradesManagerImpl.
      */
     @Test
     public void testSetSettlementDates() {
         System.out.println("setSettlementDates");
         List<Trade> trades = new ArrayList<>();
-        Optional<Trade> optionalTrade = Trade.create(
+        Optional<TradeImpl> optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -635,7 +637,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        optionalTrade = Trade.create(
+        optionalTrade = TradeImpl.create(
                 "test", 
                 TradeTypes.BUY, 
                 BigDecimal.ONE, 
@@ -646,7 +648,7 @@ public class TradesManagerIT {
         );
         if(optionalTrade.isPresent()) trades.add(optionalTrade.get());
         
-        TradesManager instance = new TradesManager(trades);
+        TradesManagerImpl instance = new TradesManagerImpl(trades);
         instance.setSettlementDates();
         
         assertEquals(trades.get(0).getSettlementDate().getDayOfWeek(), DayOfWeek.MONDAY);
